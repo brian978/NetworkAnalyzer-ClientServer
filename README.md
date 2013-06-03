@@ -8,13 +8,17 @@ to collect data (like network traffic).
 
 The application can run in either server or client mode depending on the given parameters
 
-## To run as a server you need to launch with argument: -mode server
-The possible arguments for the server mode are:
-*-port   The port you want the server to listen to
+#### To run as a server you need to launch with argument:
+* -mode server
 
-## To run as a client: -mode client
-Possible arguments:
-*-command    The client basically relies on this command, so if you don't give a command it will do nothing. Example: -command "ifconfig eth0 down"
-*-port       The port you want the client to connect to
-*-address    By default this will be "127.0.0.1". This is the address of the server part of the application that listens for connections
-*-v          Verbose. Prints some additional information besides the results of the command.
+###### Possible arguments:
+* -port   The port you want the server to listen to
+
+#### To run as a client:
+* -mode client
+
+###### Possible arguments:
+* -command    The client basically relies on this command, so if you don't give a command it will do nothing. Example: -command "ifconfig eth0 down"
+* -port       The port you want the client to connect to
+* -address    By default this will be "127.0.0.1". This is the address of the server part of the application that listens for connections
+* -v          Verbose. Prints some additional information besides the results of the command.
