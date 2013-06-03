@@ -44,15 +44,15 @@ public class Listener extends Thread {
         String line;
 
         try {
-            proc = Runtime.getRuntime().exec(s);
+            out = new PrintWriter(this.socket.getOutputStream(), true);
         } catch (IOException e) {
-            System.out.println("Could not execute command");
             return;
         }
 
         try {
-            out = new PrintWriter(this.socket.getOutputStream(), true);
+            proc = Runtime.getRuntime().exec(s);
         } catch (IOException e) {
+            out.println("Failed to execute the command");
             return;
         }
 

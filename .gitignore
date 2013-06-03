@@ -1,5 +1,5 @@
 *nbproject
 build.xml
-manifest.mf
+*.mf
 *.idea
 *.iml
