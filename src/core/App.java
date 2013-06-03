@@ -1,9 +1,5 @@
 package core;
 
-/**
- *
- * @author Brian
- */
 public class App {
 
     /**

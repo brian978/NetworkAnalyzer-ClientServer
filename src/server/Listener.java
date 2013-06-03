@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package server;
 
 import java.io.BufferedReader;
@@ -12,10 +8,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
 
-/**
- *
- * @author Brian
- */
 public class Listener extends Thread {
 
     protected Socket socket;
