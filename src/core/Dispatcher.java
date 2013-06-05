@@ -29,7 +29,7 @@ public class Dispatcher {
             if (mode.equals("server")) {
                 Server server = new Server(port);
                 server.run();
-            } else {
+            } else if (mode.equals("client")) {
 
                 // Creating the client with the given command
                 if (mode.equals("client")) {
@@ -57,7 +57,12 @@ public class Dispatcher {
                     client.run(verbose);
                 }
 
+            } else {
+                System.out.println("Invalid mode");
             }
+
+        } else {
+            System.out.println("Mode argument is required");
         }
     }
 }

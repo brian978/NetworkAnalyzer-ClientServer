@@ -81,7 +81,7 @@ public class Client implements DispatchedApp {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
             System.out.println("Could not get I/O for " + this.address);
-            System.exit(-1);
+            System.exit(0);
         }
 
         if (verbose == true) {
@@ -106,7 +106,7 @@ public class Client implements DispatchedApp {
 
             } while (response != null && response.length() <= 0);
         } catch (IOException e) {
-            System.out.println("Could not execute command");
+            output = "Could not execute command";
         }
 
         // Cleaning up
@@ -116,6 +116,10 @@ public class Client implements DispatchedApp {
             in.close();
             socket.close();
         } catch (IOException e) {
+        }
+
+        if(output.length() == 0) {
+            output = "No response received (maybe server did not respond)";
         }
 
         // Returning the command result to the caller
