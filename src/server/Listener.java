@@ -52,7 +52,7 @@ public class Listener extends Thread {
         try {
             proc = Runtime.getRuntime().exec(s);
         } catch (IOException e) {
-            out.println("Failed to execute the command");
+            out.println(e.getMessage());
             return;
         }
 
