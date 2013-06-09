@@ -6,30 +6,21 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.SocketException;
 
-public class Server implements DispatchedApp {
+public class Server implements DispatchedApp
+{
+    protected int port = 5566;
 
-    protected Integer port = 5566;
-
-    public static Class[] getPrototype()
+    public Server(int port)
     {
-        Class[] c = new Class[1];
-        c[0] = int.class;
-        return c;
-    }
-
-    public Server() {
-    }
-
-    public Server(Integer port) {
         if (port > 0) {
             this.port = port;
         }
     }
 
-    public void run() {
+    public void run()
+    {
 
         // Opening the socket for listening
-        Boolean listening = true;
         ServerSocket serverSocket = null;
 
         try {
@@ -45,11 +36,11 @@ public class Server implements DispatchedApp {
         System.out.println("Server started listening on port " + this.port);
 
         // Started to listing for incoming connections
-        while (listening) {
+        while (true) {
             try {
-                new Listener(serverSocket.accept(), listening).start();
+                new Listener(serverSocket.accept()).start();
             } catch (IOException e) {
-                System.out.println("Accept failed on port " + + this.port);
+                System.out.println("Accept failed on port " + +this.port);
                 break;
             }
         }

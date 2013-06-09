@@ -6,25 +6,23 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.SocketException;
 
-public class Listener extends Thread {
-
+public class Listener extends Thread
+{
     protected Socket socket;
-    protected Boolean listening;
 
-    public Listener(Socket socket, Boolean listening) {
+    public Listener(Socket socket)
+    {
         super("Listener");
 
         this.socket = socket;
-        this.listening = listening;
     }
 
-    public void run() {
+    public void run()
+    {
 
         try {
             InputStreamReader stream = new InputStreamReader(this.socket.getInputStream());
-
             PrintWriter out = new PrintWriter(this.socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(stream);
 
@@ -32,15 +30,24 @@ public class Listener extends Thread {
 
             in.close();
             out.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    protected void executeCommand(String s) {
-        Process proc;
-        PrintWriter out = null;
+    protected void processRequest(BufferedReader in)
+    {
+        try {
+            this.executeCommand(in.readLine());
+        } catch (Exception e) {
+            System.out.println("Cannot read line from socket");
+        }
+    }
+
+    protected void executeCommand(String s)
+    {
+        Process process;
+        PrintWriter out;
         String line;
 
         try {
@@ -49,39 +56,35 @@ public class Listener extends Thread {
             return;
         }
 
+        // Executing the command
         try {
-            proc = Runtime.getRuntime().exec(s);
+            process = Runtime.getRuntime().exec(s);
         } catch (IOException e) {
             out.println(e.getMessage());
             return;
         }
 
-        InputStream is = proc.getInputStream();
+        // Creating the readers the will, well, read the command output
+        InputStream is = process.getInputStream();
         InputStreamReader isr = new InputStreamReader(is);
         BufferedReader reader = new BufferedReader(isr);
 
+        // Outputting the response to the client
         try {
             while ((line = reader.readLine()) != null) {
                 out.println(line);
             }
-
-            reader.close();
         } catch (IOException e) {
             System.out.println("Could not read line");
         }
 
-        if (out != null) {
-            out.close();
-        }
-
-    }
-
-    protected void processRequest(BufferedReader in) {
+        // Clean up
         try {
-            this.executeCommand(in.readLine());
-        } catch (SocketException e) {
+            reader.close();
         } catch (IOException e) {
-            System.out.println("Cannot read line from socket");
+            return;
         }
+
+        out.close();
     }
 }

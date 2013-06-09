@@ -3,14 +3,15 @@ package core;
 import client.Client;
 import server.Server;
 
-public class Dispatcher {
-
+public class Dispatcher
+{
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         String mode = null;
-        Integer port = 0;
+        int port = 0;
 
         for (int i = 0; i < args.length; i++) {
 
@@ -33,7 +34,8 @@ public class Dispatcher {
 
                 // Creating the client with the given command
                 if (mode.equals("client")) {
-                    Boolean verbose = false;
+                    boolean verbose = false;
+                    boolean checkConnection = false;
                     String address = "";
                     String command = "";
 
@@ -47,20 +49,27 @@ public class Dispatcher {
                         else if (args[i].equals("-address") && i + 1 <= args.length) {
                             address = args[++i];
                         }
+                        // Address
+                        else if (args[i].equals("-check") && i + 1 <= args.length) {
+                            checkConnection = true;
+                        }
                         // Verbose
-                        else if (args[i].equals("-v") && i + 1 <= args.length) {
+                        else if (args[i].equals("-v")) {
                             verbose = true;
                         }
                     }
 
-                    Client client = new Client(address, port, command);
-                    client.run(verbose);
+                    if(!checkConnection) {
+                        Client client = new Client(address, port, command);
+                        client.run(verbose);
+                    } else {
+                        Client client = new Client(address, port);
+                        client.isServerAvailable(true);
+                    }
                 }
-
             } else {
                 System.out.println("Invalid mode");
             }
-
         } else {
             System.out.println("Mode argument is required");
         }
