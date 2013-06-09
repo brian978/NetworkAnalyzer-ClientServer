@@ -40,7 +40,7 @@ public class Listener extends Thread
         try {
             this.executeCommand(in.readLine());
         } catch (Exception e) {
-            System.out.println("Cannot read line from socket");
+            // Don't care if there was something to read or not
         }
     }
 
