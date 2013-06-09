@@ -33,8 +33,6 @@ public class Listener extends Thread
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        this.interrupt();
     }
 
     protected void processRequest(BufferedReader in)
