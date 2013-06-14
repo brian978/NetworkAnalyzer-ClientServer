@@ -4,4 +4,4 @@ build.xml
 *.idea
 *.iml
 /build/
-/dist/
+
