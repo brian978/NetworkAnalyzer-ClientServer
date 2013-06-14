@@ -44,16 +44,13 @@ public class Dispatcher
                         // Command to run
                         if (args[i].equals("-command") && i + 1 <= args.length) {
                             command = args[++i];
-                        }
-                        // Address
+                        } // Address
                         else if (args[i].equals("-address") && i + 1 <= args.length) {
                             address = args[++i];
-                        }
-                        // Address
+                        } // Address
                         else if (args[i].equals("-check") && i + 1 <= args.length) {
                             checkConnection = true;
-                        }
-                        // Verbose
+                        } // Verbose
                         else if (args[i].equals("-v")) {
                             verbose = true;
                         }
