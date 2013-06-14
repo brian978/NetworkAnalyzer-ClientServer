@@ -59,7 +59,7 @@ public class Dispatcher
                         }
                     }
 
-                    if(!checkConnection) {
+                    if (!checkConnection) {
                         Client client = new Client(address, port, command);
                         client.run(verbose);
                     } else {
