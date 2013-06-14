@@ -3,3 +3,5 @@ build.xml
 *.mf
 *.idea
 *.iml
+/build/
+/dist/
