@@ -20,7 +20,19 @@ The application can run in either server or client mode depending on the given p
 * -mode client
 
 ###### Possible arguments:
-* -command  --  The client basically relies on this command, so if you don't give a command it will do nothing. Example: -command "ifconfig eth0 down"
-* -port   --    The port you want the client to connect to. Default it is 5566.
-* -address  --  By default this will be "127.0.0.1". This is the address of the server part of the application that listens for connections
+* -command  --  The client basically relies on this command, so if you don't give a command it will do nothing.
+* -port   --    The port you want the client to connect to. The default is 5566.
+* -address  --  This is the address of the server part of the application that listens for connections. The default is "127.0.0.1"
 * -v     --     Verbose. Prints some additional information besides the results of the command.
+
+
+#### Examples
+###### Server mode
+java -jar application.jar -mode server -port 123456
+
+
+###### Client mode
+java -jar application.jar -mode client -port 123456 -command "ifconfig eth0 up"
+
+
+
